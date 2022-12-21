@@ -9,7 +9,7 @@ const schemaCreate = yup.object().shape({
     .max(100, 'görev ismi 100 karakterden az olmalıdır'),
   tamamlandi: yup
     .boolean()
-    .typeError('tamamlandı boolean olmalıdır')
+    .typeError('tamamlandı değeri boolean olmalıdır')
 })
 
 let todos
@@ -36,13 +36,13 @@ const getById = async id => {
     if (todo) {
       status = 200
       data = todo
-      message = `İşte '${id}' idli yapılacaklarınız `
+      message = `İşte '${id}' idli yapılacaklarınız`
     } else {
       status = 404
-      message = `Ana: '${id}' bulanamadı len`
+      message = `'${id}' idli bir todo bulunamadı :(`
     }
   } catch (err) {
-    message = `Ana: ${err.message}`
+    message = `Hata: ${err.message}`
     status = 422
   }
   return [status, { message, data }]
@@ -58,7 +58,7 @@ const create = async todoFromClient => {
     message = `İşte yeni oluşturduğunuz todo ${todo.id}`
     status = 201
   } catch (err) {
-    message = `Ana: ${err.message}`
+    message = `Hata: ${err.message}`
     status = 422
   }
   return [status, { message, data }]
@@ -79,7 +79,7 @@ const toggleDone = async id => {
     message = `İşte güncellediğiniz todo ${id}`
   } else {
     status = 404
-    message = `Ana: ${id} li todo bulunamadı len`
+    message = `'${id}' idli bir todo bulunamadı :(`
   }
   return [status, { message, data }]
 }
